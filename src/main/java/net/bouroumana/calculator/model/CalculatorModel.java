@@ -20,5 +20,26 @@ public class CalculatorModel implements CalculatorModelInterface {
         accu = memory.pop();
     }
 
+    @Override
+    public void drop(){
+        if(memory.isEmpty()) return;
+        if(accu != 0) accu = 0;
+        else memory.pop();
+    }
+
+    @Override
+    public void swap(){
+        if(memory.isEmpty()) return;
+        Double temp = memory.pop();
+        Double temp2 = memory.pop();
+        memory.push(temp2);
+        memory.push(temp);
+    }
+
+    @Override
+    public void clear(){
+        memory.clear();
+        accu = 0;
+    }
 
 }
