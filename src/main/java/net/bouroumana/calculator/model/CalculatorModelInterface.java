@@ -4,7 +4,7 @@ package net.bouroumana.calculator.model;
 
 public interface CalculatorModelInterface {
     void add();
-    void substract();
+    void subtract();
     void multiply();
     void divide();
     void opposite();
