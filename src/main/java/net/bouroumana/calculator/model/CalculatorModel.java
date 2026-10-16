@@ -3,15 +3,15 @@ package net.bouroumana.calculator.model;
 import java.util.Stack;
 
 public class CalculatorModel implements CalculatorModelInterface {
-    private double accu;
+    private Double accu;
     private Stack<Double> memory = new Stack<>();
 
 
-    // Clicking Enter
+    // Clicking Enter (0 can be pushed)
     @Override
     public void push(){
         memory.push(accu);
-        accu = 0;
+        accu = null;
     }
 
     @Override
@@ -23,8 +23,8 @@ public class CalculatorModel implements CalculatorModelInterface {
     @Override
     public void drop(){
         if(memory.isEmpty()) return;
-        if(accu != 0) accu = 0;
-        else memory.pop();
+//        if(accu != 0) accu = 0;
+        memory.pop();
     }
 
     @Override
@@ -39,7 +39,46 @@ public class CalculatorModel implements CalculatorModelInterface {
     @Override
     public void clear(){
         memory.clear();
-        accu = 0;
+        accu = null;
     }
+
+    @Override
+    public void add(){
+        if(memory.isEmpty()) return; // notify the user that the stack is empty
+        if(accu == null && memory.size() >= 2){
+            accu = memory.pop() + memory.pop();
+        }else{
+            accu += memory.pop();
+        }
+//        memory.push(accu);
+    }
+
+    @Override
+    public void subtract(){
+        if(memory.isEmpty()) return;
+        if(accu == null && memory.size() >= 2){
+            double a =  memory.pop();
+            double b = memory.pop();
+            accu = b - a;
+        }else{
+            accu -= memory.pop();
+        }
+        memory.push(accu);
+    }
+
+    @Override
+    public void multiply(){
+        if(memory.isEmpty()) return;
+        if(accu == null && memory.size() >= 2){
+            accu = memory.pop() * memory.pop();
+        }else{
+            accu *= memory.pop();
+        }
+        memory.push(accu);
+    }
+
+
+
+
 
 }
