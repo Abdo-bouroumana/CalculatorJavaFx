@@ -3,13 +3,14 @@ package net.bouroumana.calculator.model;
 import java.util.Stack;
 
 public class CalculatorModel implements CalculatorModelInterface {
-    private Double accu;
+    private Double accu = null;
     private Stack<Double> memory = new Stack<>();
 
 
     // Clicking Enter (0 can be pushed)
     @Override
     public void push(){
+        if(accu == null) return; // notify the user that there is no value in the accumulator
         memory.push(accu);
         accu = null;
     }
@@ -63,7 +64,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }else{
             accu -= memory.pop();
         }
-        memory.push(accu);
+//        memory.push(accu);
     }
 
     @Override
@@ -74,7 +75,31 @@ public class CalculatorModel implements CalculatorModelInterface {
         }else{
             accu *= memory.pop();
         }
-        memory.push(accu);
+//        memory.push(accu);
+    }
+
+    @Override
+    public void divide(){
+        if(memory.isEmpty()) return;
+        if(accu == null && memory.size() >= 2){
+            Double denominator = memory.pop();
+            Double nominator = memory.pop();
+            if(denominator == 0.0) return;
+            accu = denominator / nominator;
+
+        }else{
+            accu /= memory.pop();
+        }
+    }
+
+    @Override
+    public void opposite(){
+        if(memory.isEmpty() || accu == null) return;
+        accu = -accu;
+    }
+
+    public void setAccu(Double accu){
+        this.accu = accu;
     }
 
 
