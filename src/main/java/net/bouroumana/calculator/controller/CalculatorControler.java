@@ -20,9 +20,9 @@ public class CalculatorControler implements CalculatorControlerInterface {
 	}
 	
 	
+	// ===== Callbacks from the model (model → view) =====
 	@Override
 	public void change(String accu) {
-		// TODO Auto-generated method stub
 		if (view != null) {			
 			view.change(accu);
 		}
@@ -31,7 +31,6 @@ public class CalculatorControler implements CalculatorControlerInterface {
 
 	@Override
 	public void change(List<Double> stackData) {
-		// TODO Auto-generated method stub
 		if (view != null) {
 			
 			view.change(stackData);
@@ -42,6 +41,9 @@ public class CalculatorControler implements CalculatorControlerInterface {
     public void onDigit(String digit) {
     	// TO DO: Check here for valid input, put everything input var and check.
         if (digit.equals(".") && input.contains(".")) return;
+        // starting a new number: push the previous result (if any) so it is not overwritten
+        if (input.isEmpty()) model.push();
+        if (digit.equals(".") && input.isEmpty()) input = "0";
         input += digit;
         model.setAccu(Double.parseDouble(input));
     }
@@ -51,7 +53,12 @@ public class CalculatorControler implements CalculatorControlerInterface {
     public void onSubtract() { model.subtract(); input = ""; }
     public void onMultiply() { model.multiply(); input = ""; }
     public void onDivide() { model.divide(); input = ""; }
-    public void onOpposite() { model.opposite(); input = ""; }
+    public void onOpposite() {
+        if (input.isEmpty()) { model.opposite(); return; }
+        // while typing, just flip the sign of the number being typed
+        input = input.startsWith("-") ? input.substring(1) : "-" + input;
+        model.setAccu(Double.parseDouble(input));
+    }
     public void onPop() { model.pop(); input = ""; }
     public void onDrop() { model.drop(); input = ""; }
     public void onSwap() { model.swap(); input = ""; }
