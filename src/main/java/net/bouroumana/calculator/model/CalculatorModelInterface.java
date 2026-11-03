@@ -13,4 +13,5 @@ public interface CalculatorModelInterface {
     void drop();
     void swap();
     void clear();
+    void setAccu(Double accu);
 }
