@@ -101,9 +101,4 @@ public class CalculatorModel implements CalculatorModelInterface {
     public void setAccu(Double accu){
         this.accu = accu;
     }
-
-
-
-
-
 }
