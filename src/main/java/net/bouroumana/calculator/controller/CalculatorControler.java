@@ -48,27 +48,13 @@ public class CalculatorControler implements CalculatorControlerInterface {
 
     public void onPush() { model.push(); input = ""; }
     public void onAdd()  { model.add();  input = ""; }
-    public void onMultiply() { model.subtract(); input = ""; }
-    public void onSubstract() { model.subtract(); input = ""; }
-    public void onSubstract() { model.subtract(); input = ""; }
-    public void onSubstract() { model.subtract(); input = ""; }
-    public void onSubstract() { model.subtract(); input = ""; }
-    public void onSubstract() { model.subtract(); input = ""; }
-    public void onSubstract() { model.subtract(); input = ""; }
-    public void onSubstract() { model.subtract(); input = ""; }
-    
-    
-    // ... same pattern for the other buttons
-//    void add();
-//    void subtract();
-//    void multiply();
-//    void divide();
-//    void opposite();
-//    void push();
-//    void pop();
-//    void drop();
-//    void swap();
-//    void clear();
-//    void setAccu(Double accu);
+    public void onSubtract() { model.subtract(); input = ""; }
+    public void onMultiply() { model.multiply(); input = ""; }
+    public void onDivide() { model.divide(); input = ""; }
+    public void onOpposite() { model.opposite(); input = ""; }
+    public void onPop() { model.pop(); input = ""; }
+    public void onDrop() { model.drop(); input = ""; }
+    public void onSwap() { model.swap(); input = ""; }
+    public void onClear() { model.clear(); input = ""; }
 
 }
