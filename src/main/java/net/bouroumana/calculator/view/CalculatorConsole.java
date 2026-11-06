@@ -2,7 +2,6 @@ package net.bouroumana.calculator.view;
 
 import java.util.List;
 
-// Minimal view that prints the model state in the console (used to test MVC before the GUI exists)
 public class CalculatorConsole implements CalculatorGUIInterface {
 
     @Override

@@ -26,7 +26,6 @@ public class CalculatorGUI extends Scene implements CalculatorGUIInterface {
         VBox root = (VBox) getRoot();
         root.setPadding(new Insets(10));
 
-        // Display: last stack values on top, accumulator at the bottom
         for (int i = 0; i < STACK_LINES; i++) {
             stackLabels[i] = displayLabel();
             root.getChildren().add(stackLabels[i]);
@@ -35,7 +34,6 @@ public class CalculatorGUI extends Scene implements CalculatorGUIInterface {
         accuLabel.setStyle(accuLabel.getStyle() + "-fx-font-weight: bold;");
         root.getChildren().add(accuLabel);
 
-        // Keypad
         GridPane keys = new GridPane();
         keys.setHgap(5);
         keys.setVgap(5);
@@ -52,13 +50,11 @@ public class CalculatorGUI extends Scene implements CalculatorGUIInterface {
         keys.add(button(",", () -> controler.onDigit(".")), 1, 3);
         keys.add(button("+/-", controler::onOpposite), 2, 3);
 
-        // Operators column
         keys.add(button("+", controler::onAdd), 3, 0);
         keys.add(button("-", controler::onSubtract), 3, 1);
         keys.add(button("*", controler::onMultiply), 3, 2);
         keys.add(button("/", controler::onDivide), 3, 3);
 
-        // Stack operations row
         keys.add(button("push", controler::onPush), 0, 4);
         keys.add(button("pop", controler::onPop), 1, 4);
         keys.add(button("drop", controler::onDrop), 2, 4);
@@ -92,7 +88,6 @@ public class CalculatorGUI extends Scene implements CalculatorGUIInterface {
 
     @Override
     public void affiche() {
-        // Nothing to do: the Stage shows this Scene (see CalculatorApplication)
     }
 
     @Override
@@ -102,7 +97,6 @@ public class CalculatorGUI extends Scene implements CalculatorGUIInterface {
 
     @Override
     public void change(List<Double> stackData) {
-        // Bottom label = top of the stack
         int size = stackData.size();
         for (int i = 0; i < STACK_LINES; i++) {
             int index = size - STACK_LINES + i;

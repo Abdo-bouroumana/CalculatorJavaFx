@@ -14,15 +14,12 @@ public class CalculatorModel implements CalculatorModelInterface {
         this.controler = controler;
     }
 
-    // Callback: tell the controller the state changed so it can refresh the view
     private void notifyChange() {
         if (controler == null) return;
         controler.change(accu == null ? "" : accu.toString());
         controler.change(new ArrayList<>(memory));
     }
 
-    // Binary operations: if the accu is full it is the second operand (top of stack is the first),
-    // otherwise both operands are popped from the stack. Returns false if there are not enough operands.
     private boolean hasTwoOperands() {
         return (accu != null && memory.size() >= 1) || memory.size() >= 2;
     }
@@ -36,10 +33,9 @@ public class CalculatorModel implements CalculatorModelInterface {
         return memory.pop();
     }
 
-    // Clicking Enter (0 can be pushed)
     @Override
     public void push(){
-        if(accu == null) return; // notify the user that there is no value in the accumulator
+        if(accu == null) return;
         memory.push(accu);
         accu = null;
         notifyChange();
@@ -78,7 +74,7 @@ public class CalculatorModel implements CalculatorModelInterface {
 
     @Override
     public void add(){
-        if(!hasTwoOperands()) return; // notify the user that there are not enough operands
+        if(!hasTwoOperands()) return;
         double b = secondOperand();
         double a = memory.pop();
         accu = a + b;
@@ -107,7 +103,7 @@ public class CalculatorModel implements CalculatorModelInterface {
     public void divide(){
         if(!hasTwoOperands()) return;
         double denominator = (accu != null) ? accu : memory.peek();
-        if(denominator == 0.0) return; // division by zero: leave everything untouched
+        if(denominator == 0.0) return;
         double b = secondOperand();
         double a = memory.pop();
         accu = a / b;
